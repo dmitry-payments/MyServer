@@ -1,6 +1,6 @@
 version: "3.9"
 services:
   web:
-    image: твеой_путь_к_образу
+    image: astinakerobokan
     ports:
       - "8080:8080"

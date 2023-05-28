@@ -1,0 +1,12 @@
+name: Python docker login, build, push
+run-name: ${{ github.actor }} Python 🚀
+on: [push]
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          docker login  -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_HOST }}
+          docker build . -t ${{ secrets.REGISTRY_HOST }}/${{ secrets.REGISTRY_PATH }}/${{ github.event.repository.name }}:${GITHUB_RUN_NUMBER}
+          docker push ${{ secrets.REGISTRY_HOST }}/${{ secrets.REGISTRY_PATH }}/${{ github.event.repository.name }}:${GITHUB_RUN_NUMBER}

@@ -10,3 +10,13 @@ jobs:
           docker login  -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
           docker build . -t astinakerobokan/myserver:${GITHUB_RUN_NUMBER}
           docker push astinakerobokan/myserver:${GITHUB_RUN_NUMBER}
+  CD:
+    runs-on: ubuntu-latest
+    needs: CI
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          echo ${{ secrets.SERVER_PEM }} > id_rsa_server.pem
+          chmod 400 id_rsa_server.pem
+          scp -i id_rsa_server.pem -r ./ ubuntu@ТВОЙ_АЙПИШНИК_СЕВРЕРА:~/
+          ssh -i id_rsa_server.pem ubuntu@ТВОЙ_АЙПИШНИК_СЕВРЕРА "docker compose up"

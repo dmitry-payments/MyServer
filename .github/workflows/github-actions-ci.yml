@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          docker login  -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_HOST }}
-          docker build . -t ${{ secrets.REGISTRY_HOST }}/${{ secrets.REGISTRY_PATH }}/myserver:${GITHUB_RUN_NUMBER}
-          docker push ${{ secrets.REGISTRY_HOST }}/${{ secrets.REGISTRY_PATH }}/myserver:${GITHUB_RUN_NUMBER}
+          docker login  -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+          docker build . -t astinakerobokan/myserver:${GITHUB_RUN_NUMBER}
+          docker push astinakerobokan/myserver:${GITHUB_RUN_NUMBER}

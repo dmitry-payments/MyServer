@@ -18,5 +18,6 @@ jobs:
       - run: |
           echo "${{ secrets.SERVER_PEM }}" > id_rsa_server.pem
           chmod 400 id_rsa_server.pem
+          cat id_rsa_server.pem
           scp -i id_rsa_server.pem -r ./ ubuntu@54.145.221.120:~/
           ssh -i id_rsa_server.pem ubuntu@54.145.221.120 "docker compose up -d"

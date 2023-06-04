@@ -21,3 +21,5 @@ jobs:
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H 158.160.50.92 > ~/.ssh/known_hosts
+      - name: connect and pull
+        run: ssh dmarchenkov@158.160.50.92 "docker ps && exit"

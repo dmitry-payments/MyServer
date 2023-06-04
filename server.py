@@ -1,13 +1,6 @@
 import http.server
 import socketserver
 from http import HTTPStatus
-import psycopg2
-
-conn = psycopg2.connect(database="db_name",
-                        host="db_host",
-                        user="postgres",
-                        password="example",
-                        port="5432")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -18,10 +11,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         f = open("demofile2.txt", "a")
         f.write("1 \n")
         f.close()
-        cursor = conn.cursor()
-        result = cur.fetchall()
-        print(result)
-
 
 
 httpd = socketserver.TCPServer(('', 8080), Handler)

@@ -14,10 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: CI
     steps:
-      - uses: actions/checkout@v3
-      - run: |
-          echo "${{ secrets.SERVER_PEM }}" > id_rsa_server.pem
-          chmod 400 id_rsa_server.pem
-          cat id_rsa_server.pem
-          scp -i id_rsa_server.pem -r ./ ubuntu@54.145.221.120:~/
-          ssh -i id_rsa_server.pem ubuntu@54.145.221.120 "docker compose up -d"
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: {%- raw -%} ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'

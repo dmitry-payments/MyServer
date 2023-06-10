@@ -22,4 +22,4 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H 158.160.50.92 > ~/.ssh/known_hosts
       - name: connect and pull
-        run: ssh dmarchenkov@158.160.50.92 "docker kill $(docker ps -q) && docker rm $(docker ps -a -q) && docker run -d -p 8080:8080 astinakerobokan/myserver:${GITHUB_RUN_NUMBER} && exit"
+        run: ssh dmarchenkov@158.160.50.92 "docker container prune && docker run -d -p 8080:8080 myservice && exit"
